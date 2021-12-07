@@ -1,9 +1,9 @@
+#!/usr/bin/env python3
 from cairosvg import svg2png
 import argparse
 import sys
 
-svg = \
-"""
+svg = """
 <svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg" style="background-color:#B02318">
   <g id="Layer_1">
     <title>{game}: {category}</title>
@@ -25,31 +25,46 @@ svg = \
 </svg>
 """
 
+
 def name_for_game(c):
-  if c == "gamers":
-    return "House of Gamers"
-  elif c == "mouse":
-    return "House of Mouse"
-  elif c == "hose":
-    return "Hose of Gamers"
+    if c == "gamers":
+        return "House of Gamers"
+    elif c == "mouse":
+        return "House of Mouse"
+    elif c == "hose":
+        return "Hose of Gamers"
+
 
 def generate_svg(args):
-  out = svg.format(game=name_for_game(args.game), 
-                   category=args.category,
-                   description=args.description,
-                   year=args.year)
-  print(out, file=sys.stdout)
+    out = svg.format(
+        game=name_for_game(args.game),
+        category=args.category,
+        description=args.description,
+        year=args.year,
+    )
+    print(out, file=sys.stdout)
+
 
 if __name__ == "__main__":
-  parser = argparse.ArgumentParser(description = 'Generate House of Games SVG')
-  parser.add_argument('-g', '--game', help='Type of game', choices=['gamers', 'mouse', 'hose'], required=True)
-  parser.add_argument('-c', '--category', help='Category string',  required=True)
-  parser.add_argument('-y', '--year', help='Year string',  required=True)
-  parser.add_argument('-d', '--description', help='Description string', required=True)
-  parser.set_defaults(func=generate_svg)
+    parser = argparse.ArgumentParser(description="Generate House of Games SVG")
+    parser.add_argument(
+        "-g",
+        "--game",
+        help="Type of game",
+        choices=["gamers", "mouse", "hose"],
+        required=True,
+    )
+    parser.add_argument(
+        "-c", "--category", help="Category string", required=True
+    )
+    parser.add_argument("-y", "--year", help="Year string", required=True)
+    parser.add_argument(
+        "-d", "--description", help="Description string", required=True
+    )
+    parser.set_defaults(func=generate_svg)
 
-  args = parser.parse_args()
-  if not vars(args):
-    parser.print_help(sys.stderr)
-  else:
-    args.func(args)
+    args = parser.parse_args()
+    if not vars(args):
+        parser.print_help(sys.stderr)
+    else:
+        args.func(args)
