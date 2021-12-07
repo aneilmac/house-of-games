@@ -9,7 +9,7 @@ import itertools
 import sys
 
 
-def __altrange(c):
+def _altrange(c):
     """
     Given a character, returns the range of characters excluding the passed character.
     E.g. if given 'a', will return "bcdefghijklmnopqrstyvwxyz". If given 'B', will return
@@ -25,16 +25,16 @@ def __altrange(c):
                    range(ord(c) + 1, ord(c2) + 1)))
 
 
-def __alts(line):
+def _alts(line):
     """
-    Given a movie title, returns the list of all potential candidate movie titles, replacing 
-    each character in turn with all possible other valid characters.
-    E.g. `Hello` becomes `[Aello, Bello, Cello....Hellz]`.
+    Given a movie title, returns the list of all potential candidate movie titles, 
+    replacing each character in turn with all possible other valid characters.
+    E.g. `Hello` becomes `[Aello, Bello, Cello, ..., Helly, Hellz]`.
     """
 
     it = iter(())
     for i in range(len(line)):
-        alts = zip(__altrange(line[i]), itertools.cycle((i, )))
+        alts = zip(_altrange(line[i]), itertools.cycle((i, )))
         it = itertools.chain(it, (line[:i] + a + line[i + 1:] for (a,
                              i) in alts))
     return it
@@ -47,7 +47,7 @@ def mouse_of_games(line, spell_checker):
     """
 
     words = line.split()
-    candidate_words = map(__alts, words)
+    candidate_words = map(_alts, words)
     filtered_words = list(map(lambda ws: filter(lambda w: \
                            len(spell_checker.unknown((w,))) == 0, ws),
                            candidate_words))

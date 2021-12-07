@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import itertools
 from hose_of_games import hose_of_games
 from mouse_of_games import mouse_of_games
