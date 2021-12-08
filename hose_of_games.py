@@ -8,8 +8,10 @@
 def _removechar(line, i):
     """
     Given a string and an index, removes the character at that index.
-    Attempts to respect the capitalization of the removed character in the remaining characters.
-    Returns a blank string if attempting to remove a non-alpha character.
+    Attempts to respect the capitalization of the removed character in the
+    remaining characters. Returns a blank string if attempting to remove a
+    non-alpha character.
+
     E.g. "Hello" can become "Ello, Hllo, Helo, Helo, Hell."
     """
 
@@ -27,8 +29,9 @@ def _removechar(line, i):
 
 def _alts(line):
     """
-    Given a movie title, returns the list of all potential candidate movie titles, removing
-    one character in turn.
+    Given a movie title, returns the list of all potential candidate movie
+    titles, removing one character in turn.
+
     E.g. "Hello" can become "Ello, Hllo, Hlo, Hlo, Ho."
     """
 
@@ -46,7 +49,7 @@ def hose_of_games(line, spell_checker):
 
     words = line.split()
     candidate_words = map(_alts, words)
-    candidate_words = list(
+    filtered_words = list(
         map(
             lambda ws: filter(
                 lambda w: len(spell_checker.unknown((w,))) == 0, ws
@@ -56,5 +59,5 @@ def hose_of_games(line, spell_checker):
     )
 
     for i in range(len(words)):
-        for cw in candidate_words[i]:
+        for cw in filtered_words[i]:
             yield " ".join(words[:i] + [cw] + words[i + 1 :])

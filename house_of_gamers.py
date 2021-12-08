@@ -35,8 +35,10 @@ def _appendchar(line, a, i):
 
 def _alts(line):
     """
-    Given a movie title, returns the list of all potential candidate movie titles, replacing
-    each character in turn with all possible other  valid characters.
+    Given a movie title, returns the list of all potential candidate movie
+    titles, replacing each character in turn with all possible other
+    valid characters.
+
     E.g. `Hello` becomes "Ahello", "Haello", ..., "Helloy, "Helloz".
     """
 
@@ -54,7 +56,7 @@ def house_of_gamers(line, spell_checker):
 
     words = line.split()
     candidate_words = map(_alts, words)
-    candidate_words = list(
+    filtered_words = list(
         map(
             lambda ws: filter(
                 lambda w: len(spell_checker.unknown((w,))) == 0, ws
@@ -64,5 +66,5 @@ def house_of_gamers(line, spell_checker):
     )
 
     for i in range(len(words)):
-        for cw in candidate_words[i]:
+        for cw in filtered_words[i]:
             yield " ".join(words[:i] + [cw] + words[i + 1 :])

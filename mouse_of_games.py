@@ -8,10 +8,10 @@ import itertools
 
 def _altrange(c):
     """
-    Given a character, returns the range of characters excluding the passed 
-    character. E.g. if given 'a', will return 'bcdefghijklmnopqrstyvwxyz'. If 
-    given 'B', will return 'ACDEFGHIJKLMNOPRQRSTUVWXYZ'. This function respects 
-    the case of the passed character. If given a non-alpha character returns an 
+    Given a character, returns the range of characters excluding the passed
+    character. E.g. if given 'a', will return 'bcdefghijklmnopqrstyvwxyz'. If
+    given 'B', will return 'ACDEFGHIJKLMNOPRQRSTUVWXYZ'. This function respects
+    the case of the passed character. If given a non-alpha character returns an
     empty iterator.
     """
 
@@ -19,18 +19,13 @@ def _altrange(c):
         return iter(())
     else:
         (c1, c2) = ("A", "Z") if c.isupper() else ("a", "z")
-        return map(
-            chr,
-            itertools.chain(
-                range(ord(c1), ord(c)), range(ord(c) + 1, ord(c2) + 1)
-            ),
-        )
+        return (chr(i) for i in range(ord(c1), ord(c2) + 1) if i != ord(c))
 
 
 def _alts(line):
     """
-    Given a movie title, returns the list of all potential candidate movie 
-    titles, replacing each character in turn with all possible other valid 
+    Given a movie title, returns the list of all potential candidate movie
+    titles, replacing each character in turn with all possible other valid
     characters. E.g. `Hello` becomes `[Aello, Bello, Cello, ..., Helly, Hellz]`.
     """
 
