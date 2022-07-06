@@ -1,4 +1,20 @@
 #!/usr/bin/env python3
+"""
+House of Games
+==============
+
+Helper script to generate House of Games prompts.
+
+Generates potential House of Games prompts from a given answer. 
+
+Covers:
+
+* Mouse of Games, replaces one letter in the input.
+
+* House of Gamers, adds an additional letter to the input.
+
+* Hose of Gamers, removes one letter from the input.
+"""
 
 import itertools
 from hose_of_games import hose_of_games
@@ -37,14 +53,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "-r",
         "--gamers",
-        help="Mouse of Gamers calculations",
+        help="Generates House of Gamers prompts",
         action="store_true",
     )
     parser.add_argument(
-        "-m", "--mouse", help="Mouse of Games calculations", action="store_true"
+        "-m", "--mouse", help="Gernates Mouse of Games prompts", action="store_true"
     )
     parser.add_argument(
-        "-s", "--hose", help="Hose of Games calculations", action="store_true"
+        "-s", "--hose", help="Generates Hose of Games prompts", action="store_true"
     )
     parser.add_argument(
         "-d", "--dictionary", help="Use a local dictionary file.", default=None
@@ -68,3 +84,4 @@ if __name__ == "__main__":
         parser.print_help(sys.stderr)
     else:
         args.func(args)
+

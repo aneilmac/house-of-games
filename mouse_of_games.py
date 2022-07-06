@@ -1,7 +1,4 @@
-#!/usr/bin/env python3
-# Goes through all christmas movies in `xmas_films.txt` and
-# generates all potential "Mouse of Games versions", a test of validity
-# is done by running a spellchecker over the title afterwords.
+#!/usr/bin/env false
 
 import itertools
 
